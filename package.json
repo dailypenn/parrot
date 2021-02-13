@@ -1,0 +1,29 @@
+{
+  "name": "parrot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "template JSON generation website for DP and Street project pages",
+  "author": "@dailypenn",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.12.0",
+    "bootstrap": "^4.6.0",
+    "gatsby": "^2.32.3",
+    "gatsby-plugin-react-helmet": "^3.10.0",
+    "gatsby-plugin-styled-components": "^3.10.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.4.3",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "styled-components": "^5.2.1"
+  }
+}
