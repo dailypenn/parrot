@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from 'styled-components'
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor, { commands } from '@uiw/react-md-editor';
 //import { BoldText, RegularText } from './shared.js'
 
 const Wrapper = s.div`
@@ -31,15 +31,17 @@ const Info = s.div`
 `
 
 function setData(section, title, data, value) {
-    if (title == "content") {
+    if (title === "content") {
         data[0][section][title]=value.trim().split("\n\n");
     } else {
         data[0][section][title]=value.trim();
     }
+    localStorage.setItem('jsonData', JSON.stringify(data));
 }
 
 const InputField = ({ section, title, info, data }) => {
-    const [value, setValue] = useState("");
+    var storedValue = localStorage.getItem('jsonData') ? String(JSON.parse(localStorage.getItem('jsonData'))[0][section][title]) : "";
+    const [value, setValue] = useState(storedValue);
 
     var explanation = info !== undefined ? info : ""
 
@@ -53,6 +55,7 @@ const InputField = ({ section, title, info, data }) => {
                 value={value}
                 onChange={setValue}
                 onBlur={setData(section, title, data, value)}
+                commands={[commands.bold, commands.italic, commands.link, commands.orderedListCommand, commands.unorderedListCommand, commands.fullscreen]}
             />
         </Wrapper>
     )
