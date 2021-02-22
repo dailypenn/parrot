@@ -6,33 +6,39 @@ import InputField from '../components/InputField.js'
 import { Navbar, Button } from 'react-bootstrap'
 
 const IndexPage = () => {
-  const fullTemplate = require('../templates/json/34st-2021s.json');
+  const fullTemplate = require('../templates/json/34st-2021s.json')
 
   //template removes explanations for inputs
-  const template= {...fullTemplate}
-  delete template["explanations"]
+  const template = { ...fullTemplate }
+  delete template['explanations']
 
-  var jsonData = localStorage.getItem('jsonData') ? JSON.parse(localStorage.getItem('jsonData')) : [{}];
+  var jsonData = localStorage.getItem('jsonData')
+    ? JSON.parse(localStorage.getItem('jsonData'))
+    : [{}]
 
   if (!localStorage.getItem('jsonData')) {
-    Object.keys(template).map(function(key, i){
-      jsonData[0][key]={};
-      template[key].map(function(item){
-        if (item === "content") {
-          jsonData[0][key][item]=[];
+    Object.keys(template).map(function (key, i) {
+      jsonData[0][key] = {}
+      template[key].map(function (item) {
+        if (item === 'content') {
+          jsonData[0][key][item] = []
         } else {
-          jsonData[0][key][item]="";
+          jsonData[0][key][item] = ''
         }
       })
     })
-    localStorage.setItem('jsonData', JSON.stringify(jsonData));
+    localStorage.setItem('jsonData', JSON.stringify(jsonData))
   }
 
   function finalizeJSON() {
-    Object.keys(jsonData[0]).map(function(key, i){
-      template[key].map(function(item){
-        if (item === "img") {
-          jsonData[0][key][item]="../../../images" + jsonData[0]["social"]["slug"] + "/" + jsonData[0][key][item];
+    Object.keys(jsonData[0]).map(function (key, i) {
+      template[key].map(function (item) {
+        if (item === 'img') {
+          jsonData[0][key][item] =
+            '../../../images' +
+            jsonData[0]['social']['slug'] +
+            '/' +
+            jsonData[0][key][item]
         }
       })
     })
@@ -40,22 +46,29 @@ const IndexPage = () => {
 
   function downloadJSON() {
     finalizeJSON()
-    let filename = "export.json";
-    let contentType = "application/json;charset=utf-8;";
+    let filename = 'export.json'
+    let contentType = 'application/json;charset=utf-8;'
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-      var blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(jsonData)))], { type: contentType });
-      navigator.msSaveOrOpenBlob(blob, filename);
+      var blob = new Blob(
+        [decodeURIComponent(encodeURI(JSON.stringify(jsonData)))],
+        { type: contentType }
+      )
+      navigator.msSaveOrOpenBlob(blob, filename)
     } else {
-      var a = document.createElement('a');
-      a.download = filename;
-      a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(jsonData));
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      var a = document.createElement('a')
+      a.download = filename
+      a.href =
+        'data:' +
+        contentType +
+        ',' +
+        encodeURIComponent(JSON.stringify(jsonData))
+      a.target = '_blank'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
     }
   }
-    
+
   return (
     <>
       <Helmet>
@@ -82,32 +95,33 @@ const IndexPage = () => {
           flexDirection: 'row',
         }}
       >
-        <img src={require('../../static/headerlogo.png')}  height="50"/>
+        <img src={require('../../static/headerlogo.png')} height="50" />
       </Navbar>
 
-      {
-        Object.keys(template).map((key, index) => {
+      {Object.keys(template).map((key, index) => {
+        return template[key].map(item => {
           return (
-              template[key].map((item) => {
-                return (
-                  <div>
-                    <InputField
-                      section={key}
-                      title={item}
-                      info={fullTemplate["explanations"][item]}
-                      data={jsonData}
-                    />
-                  </div>
-                )
-              })
+            <div>
+              <InputField
+                section={key}
+                title={item}
+                info={fullTemplate['explanations'][item]}
+                data={jsonData}
+              />
+            </div>
           )
         })
-      }
+      })}
 
       <ButtonWrapper>
-        <Button style={{boxShadow: '0px 5px 6px #555',}} onClick={downloadJSON} variant="info">Download JSON</Button>{' '}
+        <Button
+          style={{ boxShadow: '0px 5px 6px #555' }}
+          onClick={downloadJSON}
+          variant="info"
+        >
+          Download JSON
+        </Button>{' '}
       </ButtonWrapper>
-
     </>
   )
 }
@@ -123,5 +137,3 @@ const ButtonWrapper = s.div`
 `
 
 export default IndexPage
-
-
