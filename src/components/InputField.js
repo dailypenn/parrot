@@ -31,27 +31,18 @@ const Info = s.div`
 `
 
 function setData(section, title, data, value) {
-  if (value) {
-    if (title === 'content') {
-      data[0][section][title] = value.trim().split('\n\n')
-    } else {
-      data[0][section][title] = value.trim()
-    }
-
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('jsonData', JSON.stringify(data))
-    }
+  if (title === 'content') {
+    data[0][section][title] = value.trim().split('\n\n')
+  } else {
+    data[0][section][title] = value.trim()
   }
+  localStorage.setItem('jsonData', JSON.stringify(data))
 }
 
 const InputField = ({ section, title, info, data }) => {
-  let storedValue = ''
-  if (typeof window !== 'undefined') {
-    storedValue = window.localStorage.getItem('jsonData')
-    ? String(JSON.parse(window.localStorage.getItem('jsonData'))[0][section][title])
+  var storedValue = localStorage.getItem('jsonData')
+    ? String(JSON.parse(localStorage.getItem('jsonData'))[0][section][title])
     : ''
-  }
-
   const [value, setValue] = useState(storedValue)
 
   var explanation = info !== undefined ? info : ''

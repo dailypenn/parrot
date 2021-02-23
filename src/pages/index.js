@@ -12,26 +12,22 @@ const IndexPage = () => {
   const template = { ...fullTemplate }
   delete template['explanations']
 
-  let jsonData = [{}]
-
-  if (typeof window !== 'undefined') {
-    jsonData = window.localStorage.getItem('jsonData')
-    ? JSON.parse(window.localStorage.getItem('jsonData'))
+  var jsonData = localStorage.getItem('jsonData')
+    ? JSON.parse(localStorage.getItem('jsonData'))
     : [{}]
 
-    if (!window.localStorage.getItem('jsonData')) {
-      Object.keys(template).map(function (key, i) {
-        jsonData[0][key] = {}
-        template[key].map(function (item) {
-          if (item === 'content') {
-            jsonData[0][key][item] = []
-          } else {
-            jsonData[0][key][item] = ''
-          }
-        })
+  if (!localStorage.getItem('jsonData')) {
+    Object.keys(template).map(function (key, i) {
+      jsonData[0][key] = {}
+      template[key].map(function (item) {
+        if (item === 'content') {
+          jsonData[0][key][item] = []
+        } else {
+          jsonData[0][key][item] = ''
+        }
       })
-      window.localStorage.setItem('jsonData', JSON.stringify(jsonData))
-    }
+    })
+    localStorage.setItem('jsonData', JSON.stringify(jsonData))
   }
 
   function finalizeJSON() {
