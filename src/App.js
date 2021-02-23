@@ -2,11 +2,13 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import s from 'styled-components'
 //import MDEditor from '@uiw/react-md-editor';
-import InputField from '../components/InputField.js'
+import InputField from './components/InputField.js'
 import { Navbar, Button } from 'react-bootstrap'
 
-const IndexPage = () => {
-  const fullTemplate = require('../templates/json/34st-2021s.json')
+import logo from './static/headerlogo.png'
+
+const App = () => {
+  const fullTemplate = require('./templates/json/34st-2021s.json')
 
   //template removes explanations for inputs
   const template = { ...fullTemplate }
@@ -71,20 +73,6 @@ const IndexPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Parrot | DP Tech</title>
-
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-          crossorigin="anonymous"
-        />
-      </Helmet>
-
       <Navbar
         sticky="top"
         expand="lg"
@@ -95,7 +83,7 @@ const IndexPage = () => {
           flexDirection: 'row',
         }}
       >
-        <img src={require('../../static/headerlogo.png')} height="50" />
+        <img src={logo} height="50" />
       </Navbar>
 
       {Object.keys(template).map((key, index) => {
@@ -136,4 +124,4 @@ const ButtonWrapper = s.div`
   align-items: center;
 `
 
-export default IndexPage
+export default App
