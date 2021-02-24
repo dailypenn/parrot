@@ -35,7 +35,7 @@ const App = () => {
   function finalizeJSON() {
     Object.keys(jsonData[0]).map(function (key, i) {
       template[key].map(function (item) {
-        if (item === 'img') {
+        if (item.includes('img')) {
           jsonData[0][key][item] =
             '../../../images' +
             jsonData[0]['social']['slug'] +
