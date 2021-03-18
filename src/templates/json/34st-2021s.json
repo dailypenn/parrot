@@ -6,9 +6,9 @@
     "section2": ["img", "credit", "quote", "author", "color", "bgColor", "content"],
     "quote2": ["quote", "author", "color", "bgColor", "img", "credit"],
     "section3": ["quote", "author", "color", "content"],
-    "section4": ["img", "caption", "content"],
+    "section4": ["img", "credit", "content"],
     "quote3": ["quote", "author", "color", "bgColor"],
-    "section5": ["img1", "caption1", "img2", "caption2", "content"],
+    "section5": ["img1", "credit1", "img2", "credit2", "content"],
     "section6": ["img", "credit", "content"],
     "explanations": {"img": "Name of the image file (ex. file.png)", "img1": "Name of the image file (ex. file.png)", "img2": "Name of the image file (ex. file.png)", "credit": "Ex. Miles Meline (C’22), Photo by: Sophia Dai",  "quote":  "Quote in quotation marks (ex. \"Inspirational stuff here.\")", "color": "Color of the quote text in [hex](https://htmlcolorcodes.com/) (ex. #67D072) (note: leave blank if white)", "bgColor": "Background color for the quote in [hex](https://htmlcolorcodes.com/) (ex. #67D072) (note: leave blank if white)", "author": "Ex. Adrian Ke (C’23)", "dropCap": "Dropped capital (ex. A)", "content": "Separate different paragraphs with a newline <br />(ex. ...end of paragraph one <br/><br/> start of paragraph two...)"}
 }
